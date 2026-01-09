@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { getAllProducts, getBrands } from "@/lib/data";
+import { getAllProducts, getBrands, interleaveByBrand } from "@/lib/data";
 import { moneyEUR } from "@/lib/money";
 import SortSelect from "./SortSelect";
 import ShopBanner from "@/components/ShopBanner";
+
 
 type SearchParams = {
   brand?: string;
@@ -43,9 +44,20 @@ export default async function ShopPage({
   const page = Math.max(1, Number(sp.page || "1") || 1);
 
   let filtered = all;
-  if (brand) filtered = filtered.filter((p) => p.category === brand);
-  if (q) filtered = filtered.filter((p) => p.title.toLowerCase().includes(q));
+
+if (brand) {
+  filtered = filtered.filter((p) => p.category === brand);
+} else {
+  // ✅ только для "Все товары" — чередуем бренды
+  filtered = interleaveByBrand(filtered);
+}
+
+if (q) filtered = filtered.filter((p) => p.title.toLowerCase().includes(q));
+
+// ✅ ВАЖНО: если выбрана сортировка — она должна победить "перемешивание"
+if (sort) {
   filtered = sortProducts(filtered, sort);
+}
 
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
