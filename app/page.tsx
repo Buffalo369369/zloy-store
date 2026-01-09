@@ -135,7 +135,7 @@ export default function HomePage() {
                   hover:shadow-lg
                 "
               >
-                <div className="aspect-[4/5] bg-slate-100 overflow-hidden">
+                <div className="aspect-[4/3] bg-slate-100 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={p.image || "/placeholder.jpg"}

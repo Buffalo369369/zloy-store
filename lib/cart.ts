@@ -3,6 +3,7 @@
 type CartItem = { slug: string; qty: number };
 
 const KEY = "yourstore_cart_v1";
+export const DELIVERY_PRICE = 25;
 
 function read(): CartItem[] {
   if (typeof window === "undefined") return [];
@@ -48,7 +49,6 @@ export function dec(slug: string) {
   const next = items.filter((x) => x.qty > 0);
   write(next);
 }
-
 export function clearCart() {
   write([]);
 }

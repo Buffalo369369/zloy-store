@@ -32,7 +32,7 @@ export default async function BrandPage({
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${banner})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black/50" />
 
         {/* Только кнопка */}
         <div className="relative z-10 h-full flex items-end">

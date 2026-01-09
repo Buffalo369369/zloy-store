@@ -3,18 +3,28 @@
 import { Container, Card, Button, SectionTitle } from "@/components/Ui";
 import { products } from "@/lib/data";
 import { moneyEUR } from "@/lib/money";
-import { clearCart, getCart } from "@/lib/cart";
+import { clearCart, getCart, DELIVERY_PRICE } from "@/lib/cart";
 import { useEffect, useMemo, useState } from "react";
 import Quantity from "@/components/Quantity";
 import Link from "next/link";
 
+type CartItem = { slug: string; qty: number };
+
 export default function CartPage() {
-  const [items, setItems] = useState(getCart());
+  // ⛔️ НЕ читаем localStorage в первом рендере
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
+    // ✅ читаем корзину только на клиенте после mount
     const update = () => setItems(getCart());
+    update();
+
     window.addEventListener("cart", update as any);
     window.addEventListener("storage", update);
+
     return () => {
       window.removeEventListener("cart", update as any);
       window.removeEventListener("storage", update);
@@ -31,14 +41,20 @@ export default function CartPage() {
       .filter(Boolean) as Array<{ slug: string; qty: number; product: any; line: number }>;
   }, [items]);
 
-  const total = rows.reduce((s, r) => s + r.line, 0);
+  const subtotal = rows.reduce((s, r) => s + r.line, 0);
+  const total = rows.length ? subtotal + DELIVERY_PRICE : 0;
 
   return (
     <main className="py-14 bg-neutral-50">
       <Container>
-        <SectionTitle kicker="Покупки" title="Корзина" sub="Корзина хранится локально (localStorage)." />
+        <SectionTitle kicker="Покупки" title="Корзина"  />
 
-        {rows.length === 0 ? (
+        {/* ✅ чтобы не было hydration mismatch — показываем одинаковый первый рендер */}
+        {!mounted ? (
+          <Card className="mt-10 p-8 text-center">
+            <div className="text-lg font-bold">Загрузка корзины…</div>
+          </Card>
+        ) : rows.length === 0 ? (
           <Card className="mt-10 p-8 text-center">
             <div className="text-lg font-bold">Корзина пуста</div>
             <Link href="/shop" className="mt-4 inline-flex underline underline-offset-4">
@@ -76,18 +92,29 @@ export default function CartPage() {
 
             <Card className="p-6 h-fit">
               <div className="text-lg font-extrabold">Итого</div>
-              <div className="mt-3 flex items-center justify-between text-sm text-neutral-700">
-                <span>Сумма</span>
-                <span className="font-bold">{moneyEUR(total)}</span>
+
+              <div className="mt-3 space-y-2 text-sm text-neutral-700">
+                <div className="flex items-center justify-between">
+                  <span>Сумма товаров</span>
+                  <span className="font-bold">{moneyEUR(subtotal)}</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span>Доставка</span>
+                  <span className="font-bold">{moneyEUR(DELIVERY_PRICE)}</span>
+                </div>
+
+                <div className="pt-2 border-t border-black/10 flex items-center justify-between text-base">
+                  <span className="font-extrabold">Итого</span>
+                  <span className="font-extrabold">{moneyEUR(total)}</span>
+                </div>
               </div>
 
               <Button href="/checkout" className="mt-6 w-full">
                 Перейти к оформлению →
               </Button>
 
-              <p className="mt-3 text-xs text-neutral-500">
-                Оплата/доставка — добавим позже.
-              </p>
+              <p className="mt-3 text-xs text-neutral-500">Оплата/доставка — добавим позже.</p>
             </Card>
           </div>
         )}
