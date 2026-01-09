@@ -8,23 +8,17 @@ import { useEffect, useMemo, useState } from "react";
 import Quantity from "@/components/Quantity";
 import Link from "next/link";
 
-type CartItem = { slug: string; qty: number };
-
 export default function CartPage() {
-  // ⛔️ НЕ читаем localStorage в первом рендере
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState(getCart()); // можно и [] — но тогда нужен mounted
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setItems(getCart());
 
-    // ✅ читаем корзину только на клиенте после mount
     const update = () => setItems(getCart());
-    update();
-
     window.addEventListener("cart", update as any);
     window.addEventListener("storage", update);
-
     return () => {
       window.removeEventListener("cart", update as any);
       window.removeEventListener("storage", update);
@@ -42,19 +36,27 @@ export default function CartPage() {
   }, [items]);
 
   const subtotal = rows.reduce((s, r) => s + r.line, 0);
-  const total = rows.length ? subtotal + DELIVERY_PRICE : 0;
+  const shipping = rows.length > 0 ? DELIVERY_PRICE : 0;
+  const total = subtotal + shipping;
+
+  // ✅ чтобы не было hydration mismatch — пока не mounted, показываем нейтральный лоадер
+  if (!mounted) {
+    return (
+      <main className="py-14 bg-neutral-50">
+        <Container>
+          <SectionTitle kicker="Покупки" title="Корзина" sub="Загружаем корзину..." />
+          <Card className="mt-10 p-8 text-center text-neutral-600">Загрузка…</Card>
+        </Container>
+      </main>
+    );
+  }
 
   return (
     <main className="py-14 bg-neutral-50">
       <Container>
-        <SectionTitle kicker="Покупки" title="Корзина"  />
+        <SectionTitle kicker="Покупки" title="Корзина" />
 
-        {/* ✅ чтобы не было hydration mismatch — показываем одинаковый первый рендер */}
-        {!mounted ? (
-          <Card className="mt-10 p-8 text-center">
-            <div className="text-lg font-bold">Загрузка корзины…</div>
-          </Card>
-        ) : rows.length === 0 ? (
+        {rows.length === 0 ? (
           <Card className="mt-10 p-8 text-center">
             <div className="text-lg font-bold">Корзина пуста</div>
             <Link href="/shop" className="mt-4 inline-flex underline underline-offset-4">
@@ -65,19 +67,31 @@ export default function CartPage() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             <Card className="p-6 md:col-span-2">
               <div className="space-y-5">
-                {rows.map((r) => (
-                  <div key={r.slug} className="flex items-center justify-between gap-4 border-b border-black/10 pb-4">
-                    <div>
-                      <div className="font-bold">{r.product.title}</div>
-                      <div className="text-sm text-neutral-600">{moneyEUR(r.product.price)} / шт</div>
-                    </div>
+  {rows.map((r) => (
+    <div
+      key={r.slug}
+      className="grid grid-cols-[1fr_120px_90px] items-center gap-4 border-b border-black/10 pb-4"
+    >
+      {/* Название */}
+      <div>
+        <div className="font-bold">{r.product.title}</div>
+        <div className="text-sm text-neutral-600">
+          {moneyEUR(r.product.price)} / шт
+        </div>
+      </div>
 
-                    <Quantity slug={r.slug} initial={r.qty} />
+      {/* Количество — ЦЕНТР */}
+      <div className="flex justify-center">
+        <Quantity slug={r.slug} initial={r.qty} />
+      </div>
 
-                    <div className="font-bold">{moneyEUR(r.line)}</div>
-                  </div>
-                ))}
-              </div>
+      {/* Цена — СПРАВА */}
+      <div className="text-right font-bold">
+        {moneyEUR(r.line)}
+      </div>
+    </div>
+  ))}
+</div>
 
               <div className="mt-6 flex gap-3">
                 <button
@@ -101,11 +115,11 @@ export default function CartPage() {
 
                 <div className="flex items-center justify-between">
                   <span>Доставка</span>
-                  <span className="font-bold">{moneyEUR(DELIVERY_PRICE)}</span>
+                  <span className="font-bold">{moneyEUR(shipping)}</span>
                 </div>
 
-                <div className="pt-2 border-t border-black/10 flex items-center justify-between text-base">
-                  <span className="font-extrabold">Итого</span>
+                <div className="border-t border-black/10 pt-2 flex items-center justify-between">
+                  <span className="font-semibold">Итого</span>
                   <span className="font-extrabold">{moneyEUR(total)}</span>
                 </div>
               </div>
@@ -114,7 +128,9 @@ export default function CartPage() {
                 Перейти к оформлению →
               </Button>
 
-              <p className="mt-3 text-xs text-neutral-500">Оплата/доставка — добавим позже.</p>
+              <p className="mt-3 text-xs text-neutral-500">
+                Доставка фиксированная: {moneyEUR(DELIVERY_PRICE)}.
+              </p>
             </Card>
           </div>
         )}
