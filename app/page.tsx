@@ -51,13 +51,13 @@ export default function HomePage() {
         {/* Контент */}
         <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-10 md:pb-14 text-center">
           {/* Кнопки снизу по центру */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
-              href="/shop"
-              className="bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition"
-            >
-              МАГАЗИН →
-            </Link>
+  href="/shop"
+  className="w-full sm:w-auto bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition text-center"
+>
+  МАГАЗИН →
+</Link>
 
             <a
               href="#infos"
