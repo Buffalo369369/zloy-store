@@ -3,19 +3,24 @@ import Image from "next/image";
 export default function ShopBanner() {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="relative h-[220px] md:h-[300px] w-full">
-        {/* фон */}
-       <Image
-  src="/analog.jpg"
-  alt="ZLOY PHARM"
-  fill
-  priority
-  className="
-    object-cover
-    object-[center_top]
-    md:object-center
-  "
-/>
+      <div className="relative h-[260px] md:h-[300px] w-full">
+        {/* MOBILE */}
+        <Image
+          src="/analog-mobile.jpg"
+          alt="ZLOY PHARM"
+          fill
+          priority
+          className="object-cover md:hidden"
+        />
+
+        {/* DESKTOP */}
+        <Image
+          src="/analog.jpg"
+          alt="ZLOY PHARM"
+          fill
+          priority
+          className="object-cover hidden md:block"
+        />
 
         {/* затемнение */}
         <div className="absolute inset-0 bg-black/50" />
@@ -24,22 +29,13 @@ export default function ShopBanner() {
         <div className="absolute inset-0">
           <div className="mx-auto max-w-7xl px-6 h-full flex items-center">
             <div className="max-w-2xl text-white">
-              <div className="text-sm tracking-widest uppercase text-yellow-400">
-                
-              </div>
-
-              <h1 className="mt-3 text-3xl md:text-4xl font-extrabold leading-tight">
-                <br /> 
-              </h1>
-
-              <p className="mt-4 text-white/90">
-              </p>
+              {/* если захочешь текст — сюда */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* тонкая линия снизу (по желанию) */}
+      {/* линия снизу */}
       <div className="h-px w-full bg-black/10" />
     </section>
   );
