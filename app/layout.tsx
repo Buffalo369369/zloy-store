@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "ZLOY PHARM",
-  description: "Шаблон магазина",
+  description: "ЕВРОПЕЙСКИЙ СТАНДАРТ",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
