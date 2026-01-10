@@ -5,13 +5,17 @@ export default function ShopBanner() {
     <section className="relative w-full overflow-hidden">
       <div className="relative h-[220px] md:h-[300px] w-full">
         {/* фон */}
-        <Image
-          src="/analog.jpg"
-          alt="ZLOY PHARM"
-          fill
-          priority
-          className="object-cover object-center"
-        />
+       <Image
+  src="/analog.jpg"
+  alt="ZLOY PHARM"
+  fill
+  priority
+  className="
+    object-cover
+    object-[center_top]
+    md:object-center
+  "
+/>
 
         {/* затемнение */}
         <div className="absolute inset-0 bg-black/50" />
