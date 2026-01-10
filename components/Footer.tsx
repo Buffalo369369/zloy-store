@@ -1,13 +1,28 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-white">
-      {/* ФОН-КАРТИНКА */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url(/hero.jpg)" }} // можешь заменить на /footer.jpg
-      />
+      {/* ФОН (DESKTOP + MOBILE) */}
+      <div className="absolute inset-0">
+        {/* Mobile */}
+        <Image
+          src="/footer-bg-mobile.jpg"
+          alt="Footer background mobile"
+          fill
+          priority
+          className="object-cover md:hidden"
+        />
+        {/* Desktop */}
+        <Image
+          src="/footer-bg.jpg"
+          alt="Footer background"
+          fill
+          priority
+          className="hidden md:block object-cover object-center"
+        />
+      </div>
 
       {/* ЗАТЕМНЕНИЕ + ЛЕГКИЙ ГРАДИЕНТ (для читабельности) */}
       <div className="absolute inset-0 bg-black/20" />
@@ -32,22 +47,22 @@ export default function Footer() {
             </div>
 
             <nav className="mt-4 grid gap-2 text-base">
-  <Link className="hover:text-yellow-400 transition" href="/shop">
-    Магазин
-  </Link>
-  <Link className="hover:text-yellow-400 transition" href="/cart">
-    Корзина
-  </Link>
-  <Link className="hover:text-yellow-400 transition" href="/checkout">
-    Оформление
-  </Link>
-  <Link className="hover:text-yellow-400 transition" href="/delivery">
-    Доставка
-  </Link>
-  <Link className="hover:text-yellow-400 transition" href="/infos">
-  Информация
-</Link>
-</nav>
+              <Link className="hover:text-yellow-400 transition" href="/shop">
+                Магазин
+              </Link>
+              <Link className="hover:text-yellow-400 transition" href="/cart">
+                Корзина
+              </Link>
+              <Link className="hover:text-yellow-400 transition" href="/checkout">
+                Оформление
+              </Link>
+              <Link className="hover:text-yellow-400 transition" href="/delivery">
+                Доставка
+              </Link>
+              <Link className="hover:text-yellow-400 transition" href="/infos">
+                Информация
+              </Link>
+            </nav>
           </div>
 
           {/* КОНТАКТЫ */}
