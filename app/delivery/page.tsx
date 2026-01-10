@@ -69,7 +69,7 @@ export default function DeliveryPage() {
             {/* Левая: иллюстрация/логотипы (без картинок — чтобы не зависеть от файлов) */}
             <div className="rounded-3xl border border-black/10 bg-white p-8">
               <div className="text-sm font-semibold text-slate-700">
-                Службы доставки (пример)
+                Службы доставки
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
