@@ -20,7 +20,7 @@ export default function ProductCard({
       <div className="bg-black/3 p-6">
         <div className="aspect-[4/3] w-full rounded-lg bg-black/5 flex items-center justify-center text-sm text-neutral-500">
           {image ? (
-            // если хочешь — потом заменишь на next/image
+            // 
             <img src={image} alt={title} className="h-full w-full object-cover" />
           ) : (
             "Нет изображения"

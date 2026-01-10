@@ -11,7 +11,7 @@ export type Product = {
   category: "hilma" | "driada" | "somatrop" | "marten";
 };
 
-// ✅ Hilma (37 товаров) — вставляй сюда свой массив
+// ✅ Hilma
 export const hilmaProducts: Product[] = [
   {
     slug: "BacteriostaticWater",
@@ -114,7 +114,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- ORALS ----------
+  // 
   {
     slug: "TestosteroneCypionate",
     title: "Testosterone Cypionate 250",
@@ -166,7 +166,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- PEPTIDES / HGH ----------
+  // 
   {
     slug: "StanozololInjection(ampoules)",
     title: "Stanozolol Injection (ampoules) 50",
@@ -188,7 +188,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- SUPPORT / PCT ----------
+  // 
   {
     slug: "CutStack150",
     title: "Cut Stack 150",
@@ -300,7 +300,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- ORALS ----------
+  // 
   {
     slug: "Clomiphenecitrate",
     title: "Clomiphene citrate ",
@@ -352,7 +352,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- PEPTIDES / HGH ----------
+  //
   {
     slug: "T3",
     title: "T3",
@@ -374,7 +374,7 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
 
-  // ---------- SUPPORT / PCT ----------
+  // 
   {
     slug: "Viagr-ON",
     title: "Viagr-ON ",
@@ -1012,7 +1012,7 @@ export const martenProducts: Product[] = [
   },
 ];
 
-// ✅ Общий список для магазина (ВАЖНО)
+// ✅  ВАЖНО
 export const products: Product[] = [
   ...hilmaProducts,
   ...driadaProducts,
@@ -1050,7 +1050,7 @@ export function getProductsByBrand(slug: BrandSlug) {
 export function interleaveByBrand(items: Product[]) {
   const order: BrandSlug[] = ["hilma", "driada", "somatrop", "marten"];
 
-  // делаем "корзины" по брендам
+  // 
   const buckets: Record<BrandSlug, Product[]> = {
     hilma: [],
     driada: [],
@@ -1059,7 +1059,7 @@ export function interleaveByBrand(items: Product[]) {
   };
 
   for (const p of items) {
-    // гарантируем, что кладем только в 4 бренда
+    // 
     if (isBrandSlug(p.category)) buckets[p.category].push(p);
   }
 

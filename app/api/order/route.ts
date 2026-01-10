@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const delivery = Number(body?.delivery || 0);
     const total = Number(body?.total || 0);
 
-    // Собираем текст
+    
     const lines = items
       .map(
         (x, i) =>

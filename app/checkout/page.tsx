@@ -18,7 +18,7 @@ export default function CheckoutPage() {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ читаем localStorage только после mount
+  // ✅ 
   useEffect(() => {
     setMounted(true);
 

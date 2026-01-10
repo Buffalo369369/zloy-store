@@ -48,13 +48,13 @@ export default async function ShopPage({
 if (brand) {
   filtered = filtered.filter((p) => p.category === brand);
 } else {
-  // ✅ только для "Все товары" — чередуем бренды
+  // ✅ 
   filtered = interleaveByBrand(filtered);
 }
 
 if (q) filtered = filtered.filter((p) => p.title.toLowerCase().includes(q));
 
-// ✅ ВАЖНО: если выбрана сортировка — она должна победить "перемешивание"
+// ✅ ВАЖНО:
 if (sort) {
   filtered = sortProducts(filtered, sort);
 }
@@ -74,7 +74,7 @@ if (sort) {
 
     const merged = { ...base, ...next };
 
-    // если меняем фильтры — сброс на 1
+    // сброс
     if (next.brand !== undefined || next.q !== undefined || next.sort !== undefined) {
       merged.page = "1";
     }

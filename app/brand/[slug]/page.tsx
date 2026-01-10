@@ -25,7 +25,7 @@ export default async function BrandPage({
 
   return (
     <>
-            {/* ✅ BRAND HERO (только баннер + кнопка) */}
+            {/* ✅ BRAND HERO */}
       <section className="relative h-[220px] md:h-[300px]">
         {/* Фон */}
         <div

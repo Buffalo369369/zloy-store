@@ -65,7 +65,7 @@ export default function HomePage() {
 
   {/* Контент */}
   <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-8 md:pb-14 text-center">
-    {/* Кнопки снизу по центру */}
+    {/* Кнопки */}
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
       <Link
         href="/shop"
@@ -115,7 +115,7 @@ export default function HomePage() {
                     {cat.oil}
                   </div>
 
-                  {/* ССЫЛКА ВСЕГДА ВНИЗУ */}
+                  {/* ССЫЛКА */}
                   <span className="mt-auto pt-5 inline-flex items-center text-sm font-medium text-orange-600">
                     Смотреть →
                   </span>

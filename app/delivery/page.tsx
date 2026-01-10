@@ -66,7 +66,7 @@ export default function DeliveryPage() {
 
           {/* 2 колонки */}
           <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-start">
-            {/* Левая: иллюстрация/логотипы (без картинок — чтобы не зависеть от файлов) */}
+            {/* Левая */}
             <div className="rounded-3xl border border-black/10 bg-white p-8">
               <div className="text-sm font-semibold text-slate-700">
                 Службы доставки
@@ -117,7 +117,7 @@ export default function DeliveryPage() {
               </div>
             </div>
 
-            {/* Правая: текст + полосы */}
+            {/* Правая */}
             <div>
               <div className="text-3xl md:text-4xl font-extrabold tracking-tight">
                 Безопасная и аккуратная доставка
@@ -130,8 +130,8 @@ export default function DeliveryPage() {
                 перевозчика.
               </p>
 
-              {/* Картинка вместо полос */}
-{/* Картинка вместо полос */}
+              {/* Картинка */}
+{/* Картинка */}
 <div className="mt-8 overflow-hidden rounded-3xl border border-black/10 bg-slate-50">
   <img
     src="/delivery-illustration.jpg"
@@ -265,7 +265,7 @@ export default function DeliveryPage() {
             </div>
 
           
-            {/* Справа иллюстрация */}
+            {/* иллюстрация */}
 <div className="rounded-3xl border border-black/10 bg-slate-50 p-10 flex items-center justify-center shadow-sm">
   <div className="relative w-full h-[360px] md:h-[320px]">
     <Image
@@ -279,7 +279,7 @@ export default function DeliveryPage() {
 </div>
           </div>
 
-          {/* Контактная форма (простая) */}
+          {/* форма */}
           <div className="mt-16">
             <div className="text-2xl font-extrabold">Связаться с нами</div>
 

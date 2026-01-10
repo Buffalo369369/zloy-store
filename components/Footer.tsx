@@ -24,7 +24,7 @@ export default function Footer() {
         />
       </div>
 
-      {/* ЗАТЕМНЕНИЕ + ЛЕГКИЙ ГРАДИЕНТ (для читабельности) */}
+      {/* ЗАТЕМНЕНИЕ */}
       <div className="absolute inset-0 bg-black/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/70" />
 
@@ -97,7 +97,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* НИЖНЯЯ ПОЛОСКА */}
+        {/*  */}
         <div className="mt-10 border-t border-white/10 pt-6 text-center text-sm text-white/65">
           © 2026 ZLOY PHARM • Все права защищены
         </div>

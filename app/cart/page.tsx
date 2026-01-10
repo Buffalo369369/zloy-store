@@ -9,7 +9,7 @@ import Quantity from "@/components/Quantity";
 import Link from "next/link";
 
 export default function CartPage() {
-  const [items, setItems] = useState(getCart()); // можно и [] — но тогда нужен mounted
+  const [items, setItems] = useState(getCart()); 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function CartPage() {
   const shipping = rows.length > 0 ? DELIVERY_PRICE : 0;
   const total = subtotal + shipping;
 
-  // ✅ чтобы не было hydration mismatch — пока не mounted, показываем нейтральный лоадер
+  // ✅
   if (!mounted) {
     return (
       <main className="py-14 bg-neutral-50">

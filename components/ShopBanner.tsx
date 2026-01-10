@@ -29,13 +29,13 @@ export default function ShopBanner() {
         <div className="absolute inset-0">
           <div className="mx-auto max-w-7xl px-6 h-full flex items-center">
             <div className="max-w-2xl text-white">
-              {/* если захочешь текст — сюда */}
+              {/*  */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* линия снизу */}
+      {/* линия */}
       <div className="h-px w-full bg-black/10" />
     </section>
   );

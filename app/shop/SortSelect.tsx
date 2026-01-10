@@ -12,7 +12,7 @@ export default function SortSelect({ value }: { value: string }) {
     if (val) sp.set(key, val);
     else sp.delete(key);
 
-    // при смене сортировки — страницу на 1
+    // 1
     sp.set("page", "1");
 
     router.push(`/shop?${sp.toString()}`);
