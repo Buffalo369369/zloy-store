@@ -129,7 +129,7 @@ export default function CartPage() {
               </Button>
 
               <p className="mt-3 text-xs text-neutral-500">
-                Доставка фиксированная: {moneyEUR(DELIVERY_PRICE)}.
+                Доставка: {moneyEUR(DELIVERY_PRICE)}.
               </p>
             </Card>
           </div>
