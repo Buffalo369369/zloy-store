@@ -2,6 +2,7 @@ import Link from "next/link";
 import InfoCard from "@/components/InfoCard";
 import { getAllProducts } from "@/lib/data";
 import { moneyEUR } from "@/lib/money";
+import Image from "next/image";
 
 const cats = [
   {
@@ -40,34 +41,48 @@ export default function HomePage() {
   return (
     <main>
       {/* HERO */}
-      <section className="relative h-[320px] md:h-[460px]">
-        {/* Фон */}
-        <div
-          className="absolute inset-0 bg-cover bg-[center_35%]"
-          style={{ backgroundImage: "url(/hero.jpg)" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
+<section className="relative h-[360px] md:h-[460px] overflow-hidden">
+  {/* Фон MOBILE */}
+  <Image
+    src="/hero-mobile.jpg"
+    alt="ZLOY PHARM"
+    fill
+    priority
+    className="object-cover md:hidden"
+  />
 
-        {/* Контент */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-10 md:pb-14 text-center">
-          {/* Кнопки снизу по центру */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-            <Link
-  href="/shop"
-  className="w-full sm:w-auto bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition text-center"
->
-  МАГАЗИН →
-</Link>
+  {/* Фон DESKTOP */}
+  <Image
+    src="/hero.jpg"
+    alt="ZLOY PHARM"
+    fill
+    priority
+    className="object-cover hidden md:block"
+  />
 
-            <a
-              href="#infos"
-              className="border border-white text-white px-8 py-3 rounded hover:bg-white hover:text-black transition"
-            >
-              Ответы на вопросы
-            </a>
-          </div>
-        </div>
-      </section>
+  {/* затемнение */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
+
+  {/* Контент */}
+  <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-8 md:pb-14 text-center">
+    {/* Кнопки снизу по центру */}
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+      <Link
+        href="/shop"
+        className="w-full sm:w-auto bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition text-center"
+      >
+        МАГАЗИН →
+      </Link>
+
+      <a
+        href="#infos"
+        className="w-full sm:w-auto border border-white text-white px-8 py-3 rounded hover:bg-white hover:text-black transition text-center"
+      >
+        Ответы на вопросы
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* CATEGORY CARDS */}
       <section className="bg-white">
