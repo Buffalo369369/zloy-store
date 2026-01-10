@@ -6,7 +6,7 @@ export default function ShopBanner() {
       <div className="relative h-[220px] md:h-[300px] w-full">
         {/* фон */}
         <Image
-          src="/analog.jpg"
+          src="/analot.jpg"
           alt="ZLOY PHARM"
           fill
           priority
