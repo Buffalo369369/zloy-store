@@ -53,9 +53,7 @@ export default function Footer() {
               <Link className="hover:text-yellow-400 transition" href="/cart">
                 Корзина
               </Link>
-              <Link className="hover:text-yellow-400 transition" href="/checkout">
-                Оформление
-              </Link>
+              
               <Link className="hover:text-yellow-400 transition" href="/delivery">
                 Доставка
               </Link>

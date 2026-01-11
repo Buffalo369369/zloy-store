@@ -32,9 +32,7 @@ export default function Header() {
           <Link className="hover:text-yellow-500 transition" href="/cart">
             Корзина
           </Link>
-          <Link className="hover:text-yellow-500 transition" href="/checkout">
-            Оформление
-          </Link>
+          
           <Link className="hover:text-yellow-500 transition" href="/delivery">
             Доставка
           </Link>
@@ -63,9 +61,7 @@ export default function Header() {
             <Link onClick={() => setOpen(false)} href="/cart">
               Корзина
             </Link>
-            <Link onClick={() => setOpen(false)} href="/checkout">
-              Оформление
-            </Link>
+            
             <Link onClick={() => setOpen(false)} href="/delivery">
               Доставка
             </Link>
