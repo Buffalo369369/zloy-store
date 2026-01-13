@@ -23,8 +23,6 @@ const steps = [
 const paymentMethods = [
   "Crypto (USDT и другие)",
   "Банковский перевод",
-  "PayPal (если доступно в вашем регионе)",
-  "Western Union (по согласованию)",
 ];
 
 const policyBullets = [
