@@ -54,9 +54,9 @@ export const hilmaProducts: Product[] = [
     category: "hilma",
   },
   {
-    slug: "MethenoloneEnanthate",
+    slug: "MethenoloneEnanthate100",
     title: "Methenolone Enanthate 100",
-    price: 70,
+    price: 120,
     image: "/products/hilma/hilma-5.jpg",
     short: "10 ml / 100 mg/ml",
     description: "Methenolone Enanthate, также известный как Primobolan, — это мощный анаболический стероид, заслуживший признание благодаря своей способности сжигать жир без выраженной задержки жидкости и при этом защищать уже набранную мышечную массу. Эти свойства делают Метенолон Энантат популярным выбором среди атлетов, стремящихся избавиться от лишнего жира. Он обладает мягким анаболическим действием и оказывает прямое влияние на жиросжигание. Дополнительно препарат повышает силу, ускоряет восстановление и улучшает выносливость, что делает его отличным вариантом как для мужчин, так и для женщин, заинтересованных в улучшении спортивных результатов.",
@@ -1482,7 +1482,7 @@ export const somatropProducts: Product[] = [
    {
     slug: "DrostanoloneEnanthate200Somatrop",
     title: "Drostanolone Enanthate 200 Somatrop",
-    price: 60,
+    price: 70,
     image: "/products/somatrop/somatrop-2.jpg",
     short: "10ml/200 mg/ml",
     description: "Описание товара.",
@@ -1492,7 +1492,7 @@ export const somatropProducts: Product[] = [
  {
     slug: "DrostanolonePropionate100Somatrop",
     title: "Drostanolone Propionate 100 Somatrop",
-    price: 55,
+    price: 60,
     image: "/products/somatrop/somatrop-3.jpg",
     short: "10ml/100 mg/ml",
     description: "Описание товара.",
@@ -1502,7 +1502,7 @@ export const somatropProducts: Product[] = [
  {
     slug: "MethenoloneEnanthate100Somatrop",
     title: "Methenolone Enanthate 100Somatrop",
-    price: 70,
+    price: 120,
     image: "/products/somatrop/somatrop-4.jpg",
     short: "10ml/100 mg/ml",
     description: "Описание товара.",
