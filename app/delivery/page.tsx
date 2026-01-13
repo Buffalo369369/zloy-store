@@ -222,7 +222,7 @@ export default function DeliveryPage() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href="mailto:zloypharma@gmail.com"
+                  href="mailto:zloypharm@mail.ru"
                   className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white border border-black/10 hover:bg-slate-100 transition"
                 >
                   Написать на email
@@ -292,7 +292,7 @@ export default function DeliveryPage() {
               </a>
 
               <a
-                href="mailto:zloypharma@gmail.com"
+                href="mailto:zloypharm@mail.ru"
                 className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white border border-black/10 hover:bg-slate-50 transition"
               >
                 Написать на email

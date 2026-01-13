@@ -296,7 +296,7 @@ export default function HomePage() {
                   Задать вопрос →
                 </a>
                 <a
-                  href="mailto:zloypharma@gmail.com"
+                  href="mailto:zloypharm@mail.ru"
                   className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold border border-black/15 bg-white hover:bg-slate-50 transition"
                 >
                   Написать на email
