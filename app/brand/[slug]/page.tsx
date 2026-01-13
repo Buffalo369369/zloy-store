@@ -70,8 +70,8 @@ export default async function BrandPage({
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((p) => (
-                <Link
-                  key={p.slug}
+                <Link 
+                key={p.slug}
                   href={`/product/${p.slug}`}
                   className="group rounded-2xl border border-black/10 bg-white overflow-hidden hover:shadow-lg transition"
                 >
