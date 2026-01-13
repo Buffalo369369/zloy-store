@@ -28,7 +28,7 @@ const paymentMethods = [
 ];
 
 const policyBullets = [
-  " Пожалуйста, ведите видеосъёмку при распаковке товара. В случае наличия видео, если обнаружится недостача или повреждение, мы осуществим повторную отправку.",
+  "Пожалуйста, ведите видеосъёмку при распаковке товара. В случае наличия видео, если обнаружится недостача или повреждение, мы осуществим повторную отправку.",
   "Если с нашей стороны была допущена ошибка в адресе, мы также оформим повторную отправку в случае, если посылка до вас не дошла.",
   "По вопросам повторной отправки — пишите в поддержку, указав номер заказа.",
 ];
@@ -279,57 +279,29 @@ export default function DeliveryPage() {
 </div>
           </div>
 
-          {/* форма */}
+                    {/* связь */}
           <div className="mt-16">
             <div className="text-2xl font-extrabold">Связаться с нами</div>
 
-            <div className="mt-6 grid gap-5">
-              <div>
-                <label className="block text-sm font-semibold text-slate-700">
-                  Имя <span className="text-red-500">*</span>
-                </label>
-                <input
-                  className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-yellow-300"
-                  placeholder="Ваше имя"
-                />
-              </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://t.me/zloy_zakaz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-yellow-400 text-black hover:bg-yellow-300 transition"
+              >
+                Написать в Telegram →
+              </a>
 
-              <div>
-                <label className="block text-sm font-semibold text-slate-700">
-                  Электронная почта <span className="text-red-500">*</span>
-                </label>
-                <input
-                  className="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-yellow-300"
-                  placeholder="name@email.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-700">
-                  Комментарий или сообщение
-                </label>
-                <textarea
-                  className="mt-2 w-full min-h-[140px] rounded-xl border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-yellow-300"
-                  placeholder="Напишите ваш вопрос…"
-                />
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://t.me/zloy_zakaz"
-                  className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-yellow-400 text-black hover:bg-yellow-300 transition"
-                >
-                  Написать в Telegram →
-                </a>
-                <a
-                  href="mailto:zloypharma@gmail.com"
-                  className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white border border-black/10 hover:bg-slate-50 transition"
-                >
-                  Написать на email
-                </a>
-              </div>
+              <a
+                href="mailto:zloypharma@gmail.com"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white border border-black/10 hover:bg-slate-50 transition"
+              >
+                Написать на email
+              </a>
             </div>
           </div>
+
         </div>
       </section>
     </main>
