@@ -89,7 +89,7 @@ export default function DeliveryPage() {
                 </div>
                 <p className="mt-2 text-slate-600 leading-relaxed">
                   Упаковываем аккуратно и без лишних обозначений. Где возможно —
-                  используем нейтральные формулировки и минимизацию данных.
+                  используем нейтральные формулировки и минимализацию данных.
                 </p>
 
                 <div className="mt-6 grid gap-3">
