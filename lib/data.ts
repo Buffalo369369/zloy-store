@@ -1454,7 +1454,7 @@ export const driadaProducts: Product[] = [
 {
     slug: "HGHSomatropin(Liquid)Driada",
     title: "HGH Somatropin  (Liquid) Driada",
-    price: 40,
+    price: 110,
     image: "/products/driada/driada-90.jpg",
     short: "50IUx1 vials/50IU",
     description: "Описание товара.",
