@@ -6,6 +6,22 @@ import FloatingCart from "@/components/FloatingCart";
 export const metadata = {
   title: "ZLOY PHARM",
   description: "ЕВРОПЕЙСКИЙ СТАНДАРТ",
+  openGraph: {
+    title: "ZLOY PHARM",
+    description: "ЕВРОПЕЙСКИЙ СТАНДАРТ",
+    url: "https://zloy-pharm-gr.vercel.app",
+    siteName: "ZLOY PHARM",
+    images: [
+      {
+        url: "https://zloy-pharm-gr.vercel.app/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ZLOY PHARM",
+      },
+    ],
+    locale: "ru_RU",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
