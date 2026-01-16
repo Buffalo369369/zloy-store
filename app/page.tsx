@@ -1,6 +1,6 @@
 import Link from "next/link";
 import InfoCard from "@/components/InfoCard";
-import { getAllProducts } from "@/lib/data";
+import { getProduct, type Product } from "@/lib/data";
 import { moneyEUR } from "@/lib/money";
 import Image from "next/image";
 
@@ -36,53 +36,62 @@ const cats = [
 ];
 
 export default function HomePage() {
-  const featured = getAllProducts().slice(0, 4); // первые 4 товара
+  const featuredSlugs = [
+    "TestosteroneEnanthate",
+    "TestosteroneEnanthate250Driada",
+    "TestosteroneEnanthate250Somatrop",
+    "HGHSomatropin(Liquid)Marten",
+  ];
+
+  const featured = featuredSlugs
+    .map((slug) => getProduct(slug))
+    .filter((p): p is Product => Boolean(p));
 
   return (
     <main>
       {/* HERO */}
-<section className="relative h-[360px] md:h-[460px] overflow-hidden">
-  {/* Фон MOBILE */}
-  <Image
-    src="/hero-mobile.jpg"
-    alt="ZLOY PHARM"
-    fill
-    priority
-    className="object-cover md:hidden"
-  />
+      <section className="relative h-[360px] md:h-[460px] overflow-hidden">
+        {/* Фон MOBILE */}
+        <Image
+          src="/hero-mobile.jpg"
+          alt="ZLOY PHARM"
+          fill
+          priority
+          className="object-cover md:hidden"
+        />
 
-  {/* Фон DESKTOP */}
-  <Image
-    src="/hero.jpg"
-    alt="ZLOY PHARM"
-    fill
-    priority
-    className="object-cover hidden md:block"
-  />
+        {/* Фон DESKTOP */}
+        <Image
+          src="/hero.jpg"
+          alt="ZLOY PHARM"
+          fill
+          priority
+          className="object-cover hidden md:block"
+        />
 
-  {/* затемнение */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
+        {/* затемнение */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
 
-  {/* Контент */}
-  <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-8 md:pb-14 text-center">
-    {/* Кнопки */}
-    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-      <Link
-        href="/shop"
-        className="w-full sm:w-auto bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition text-center"
-      >
-        МАГАЗИН →
-      </Link>
+        {/* Контент */}
+        <div className="relative z-10 h-full flex flex-col items-center justify-end px-4 pb-8 md:pb-14 text-center">
+          {/* Кнопки */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+            <Link
+              href="/shop"
+              className="w-full sm:w-auto bg-yellow-400 text-black px-8 py-3 font-semibold rounded hover:bg-yellow-300 transition text-center"
+            >
+              МАГАЗИН →
+            </Link>
 
-      <a
-        href="#infos"
-        className="w-full sm:w-auto border border-white text-white px-8 py-3 rounded hover:bg-white hover:text-black transition text-center"
-      >
-        Ответы на вопросы
-      </a>
-    </div>
-  </div>
-</section>
+            <a
+              href="#infos"
+              className="w-full sm:w-auto border border-white text-white px-8 py-3 rounded hover:bg-white hover:text-black transition text-center"
+            >
+              Ответы на вопросы
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* CATEGORY CARDS */}
       <section className="bg-white">
