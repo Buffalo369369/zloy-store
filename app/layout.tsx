@@ -13,7 +13,7 @@ export const metadata = {
     siteName: "ZLOY PHARM",
     images: [
       {
-        url: "https://zloy-pharm-gr.vercel.app/og-image.jpg",
+        url: "https://zloy-pharm-gr.vercel.app/og-imagene.jpg",
         width: 1200,
         height: 630,
         alt: "ZLOY PHARM",
