@@ -1,44 +1,33 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Container, Card, SectionTitle, Button } from "@/components/Ui";
-import { setUser } from "@/lib/auth";
 
 export default function AuthPage() {
-  const router = useRouter();
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [loading, setLoading] = useState(false);
 
+  // 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [telegram, setTelegram] = useState("");
 
-  function handleSubmit() {
-    if (!email || !password) {
-      alert("Введите email и пароль");
-      return;
+  async function submit() {
+    setLoading(true);
+    try {
+      // ✅ заглушка
+      alert(
+        mode === "login"
+          ? "Вход не подключен ✅"
+          : "Регистрация не подключена ✅"
+      );
+    } finally {
+      setLoading(false);
     }
-
-    if (mode === "register") {
-      if (!name || !phone || !telegram) {
-        alert("Заполните все поля регистрации");
-        return;
-      }
-    }
-
-    // ✅ сохраняем пользователя локально
-    setUser({
-      email,
-      name: mode === "register" ? name : "Клиент",
-      phone: mode === "register" ? phone : "",
-      telegram: mode === "register" ? telegram.replace("@", "") : "",
-    });
-
-    // ✅ возвращаем на оформление
-    router.push("/checkout");
   }
 
   return (
@@ -47,11 +36,7 @@ export default function AuthPage() {
         <SectionTitle
           kicker="Аккаунт"
           title={mode === "login" ? "Вход" : "Регистрация"}
-          sub={
-            mode === "login"
-              ? "Войдите, чтобы подтвердить заказ"
-              : "Создайте аккаунт для оформления заказа"
-          }
+          sub=""
         />
 
         <Card className="mt-10 p-8 max-w-md mx-auto">
@@ -60,9 +45,9 @@ export default function AuthPage() {
             <label className="text-sm font-semibold">
               Email
               <input
-                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                type="email"
                 className="mt-2 w-full rounded-md border border-black/10 px-4 py-3 bg-white"
                 placeholder="email@gmail.com"
               />
@@ -72,24 +57,24 @@ export default function AuthPage() {
             <label className="text-sm font-semibold">
               Пароль
               <input
-                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                type="password"
                 className="mt-2 w-full rounded-md border border-black/10 px-4 py-3 bg-white"
                 placeholder="••••••••"
               />
             </label>
 
-            {/* REGISTRATION EXTRA */}
+            {/* REGISTRATION EXTRA FIELDS */}
             {mode === "register" && (
               <>
                 <label className="text-sm font-semibold">
                   ФИО
                   <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     className="mt-2 w-full rounded-md border border-black/10 px-4 py-3 bg-white"
-                    placeholder="Иван Иванов"
+                    placeholder=""
                   />
                 </label>
 
@@ -99,7 +84,7 @@ export default function AuthPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="mt-2 w-full rounded-md border border-black/10 px-4 py-3 bg-white"
-                    placeholder="+49 / +380 / +7"
+                    placeholder=""
                   />
                 </label>
 
@@ -117,30 +102,30 @@ export default function AuthPage() {
 
             {/* FORGOT PASSWORD */}
             {mode === "login" && (
-              <button
-                type="button"
-                onClick={() =>
-                  alert(
-                    "Восстановление пароля происходит через поддержку (Telegram или email)."
-                  )
-                }
+              <Link
+                href="/auth/reset"
                 className="text-sm text-slate-600 hover:text-black underline underline-offset-4 text-left"
               >
                 Забыли пароль?
-              </button>
+              </Link>
             )}
 
             {/* SUBMIT */}
-            <Button onClick={handleSubmit} className="w-full bg-yellow-400 text-black hover:bg-yellow-300">
-              {mode === "login" ? "Войти →" : "Создать аккаунт →"}
+            <Button className="w-full" onClick={submit} disabled={loading}>
+              {loading
+                ? "Подождите..."
+                : mode === "login"
+                ? "Войти →"
+                : "Создать аккаунт →"}
             </Button>
 
-            {/* SWITCH */}
+            {/* SWITCH MODE */}
             <div className="text-sm text-center text-slate-600">
               {mode === "login" ? (
                 <>
                   Нет аккаунта?{" "}
                   <button
+                    type="button"
                     onClick={() => setMode("register")}
                     className="font-semibold text-black underline underline-offset-4"
                   >
@@ -151,6 +136,7 @@ export default function AuthPage() {
                 <>
                   Уже есть аккаунт?{" "}
                   <button
+                    type="button"
                     onClick={() => setMode("login")}
                     className="font-semibold text-black underline underline-offset-4"
                   >
