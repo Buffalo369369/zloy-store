@@ -1313,7 +1313,7 @@ export const driadaProducts: Product[] = [
   },
  {
     slug: "HCGGonadotropin5000IUDriada",
-    title: "HCGGonadotropin 5000IU Driada",
+    title: "HCG Gonadotropin 5000IU Driada",
     price: 45,
     image: "/products/driada/driada-78.jpg",
     short: "1vial/5000IU + water",
@@ -1321,16 +1321,7 @@ export const driadaProducts: Product[] = [
     rating: 5,
     category: "driada",
   },
- {
-    slug: "HCGGonadotropin2000IUDriada",
-    title: "HCG Gonadotropin 2000IU Driada",
-    price: 25,
-    image: "/products/driada/driada-79.jpg",
-    short: "1vial/2000IU + water",
-    description: "HCG (ХГЧ) — это аналог лютенизирующего гормона (ЛГ), который стимулирует выработку тестостерона и поддерживает нормальную работу яичек. При использовании анаболических стероидов (ААС) уровень лютенизирующего гормона в организме снижается, что может привести к атрофии яичек.",
-    rating: 5,
-    category: "driada",
-  },
+
  {
     slug: "SemaglutideDriada",
     title: "Semaglutide Driada",
