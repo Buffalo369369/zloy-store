@@ -1,13 +1,12 @@
 "use client";
 
-import { Container, Card, SectionTitle, Button } from "@/components/Ui";
-import { clearCart, getCart, DELIVERY_PRICE } from "@/lib/cart";
-import { products } from "@/lib/data";
-import { moneyEUR } from "@/lib/money";
-import { getUser } from "@/lib/auth";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Container, Card, SectionTitle, Button } from "@/components/Ui";
+import { getCart, DELIVERY_PRICE } from "@/lib/cart";
+import { products } from "@/lib/data";
+import { moneyEUR } from "@/lib/money";
 
 type CartItem = { slug: string; qty: number };
 
@@ -16,34 +15,24 @@ export default function CheckoutPage() {
 
   const [mounted, setMounted] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [loading, setLoading] = useState(false);
 
-  const [user, setUserState] = useState<ReturnType<typeof getUser>>(null);
-
-  // ✅ грузим корзину + юзера только на клиенте
   useEffect(() => {
     setMounted(true);
 
     const updateCart = () => setCartItems(getCart());
     updateCart();
 
-    const updateUser = () => setUserState(getUser());
-    updateUser();
-
     window.addEventListener("cart", updateCart as any);
     window.addEventListener("storage", updateCart);
-    window.addEventListener("auth", updateUser as any);
 
     return () => {
       window.removeEventListener("cart", updateCart as any);
       window.removeEventListener("storage", updateCart);
-      window.removeEventListener("auth", updateUser as any);
     };
   }, []);
 
   const rows = useMemo(() => {
     if (!mounted) return [];
-
     return cartItems
       .map((x) => {
         const p = products.find((p) => p.slug === x.slug);
@@ -58,7 +47,7 @@ export default function CheckoutPage() {
   const delivery = mounted && rows.length ? DELIVERY_PRICE : 0;
   const total = subtotal + delivery;
 
-  async function handleConfirm() {
+  function handleConfirm() {
     if (!mounted) return;
 
     if (rows.length === 0) {
@@ -67,50 +56,18 @@ export default function CheckoutPage() {
       return;
     }
 
-    // ❗️если не авторизован — отправляем на /auth
-    if (!user) {
-      router.push("/auth");
-      return;
-    }
-
-    // ✅ авторизован — отправляем заказ
-    setLoading(true);
-    try {
-      const res = await fetch("/api/order", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          // данные клиента
-          name: user.name,
-          contact: `${user.phone} | @${user.telegram}`.replace("| @ |", "|"),
-          comment: `Email: ${user.email}`,
-          // заказ
-          items: rows,
-          subtotal,
-          delivery,
-          total,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data?.ok) {
-        alert("Ошибка отправки заказа: " + (data?.error || "unknown"));
-        return;
-      }
-
-      clearCart();
-      alert("Заказ отправлен ✅");
-      router.push("/shop");
-    } finally {
-      setLoading(false);
-    }
+    // ✅ пока нет сервера — просто ведём на авторизацию
+    router.push("/auth");
   }
 
   return (
     <main className="py-14 bg-neutral-50">
       <Container>
-        <SectionTitle kicker="Финиш" title="Оформление заказа" sub={user ? `Профиль: ${user.email}` : "Войдите, чтобы подтвердить заказ"} />
+        <SectionTitle
+          kicker="Финиш"
+          title="Оформление заказа"
+          sub="Сейчас подтверждение ведёт на авторизацию. Сервер подключим позже."
+        />
 
         <Card className="mt-10 p-8 max-w-2xl mx-auto">
           <div className="rounded-xl border border-black/10 bg-white p-5">
@@ -139,8 +96,12 @@ export default function CheckoutPage() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button onClick={handleConfirm} disabled={!mounted || loading} className="bg-yellow-400 text-black hover:bg-yellow-300">
-              {loading ? "Отправляю..." : user ? "Подтвердить заказ →" : "Войти и подтвердить →"}
+            <Button
+              onClick={handleConfirm}
+              disabled={!mounted}
+              className="bg-yellow-400 text-black hover:bg-yellow-300"
+            >
+              Подтвердить заказ →
             </Button>
 
             <Link
@@ -150,12 +111,6 @@ export default function CheckoutPage() {
               ← Назад в корзину
             </Link>
           </div>
-
-          {!user ? (
-            <p className="mt-4 text-xs text-neutral-500">
-              После авторизации вернётесь сюда и сможете подтвердить заказ.
-            </p>
-          ) : null}
         </Card>
       </Container>
     </main>
