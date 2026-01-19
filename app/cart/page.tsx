@@ -69,9 +69,13 @@ export default function CartPage() {
               <div className="space-y-5">
   {rows.map((r) => (
     <div
-      key={r.slug}
-      className="grid grid-cols-[1fr_120px_90px] items-center gap-4 border-b border-black/10 pb-4"
-    >
+  key={r.slug}
+  className="
+    grid grid-cols-1 gap-3
+    md:grid-cols-[1fr_120px_90px] md:gap-4
+    items-center border-b border-black/10 pb-4
+  "
+>
       {/* Название */}
       <div>
         <div className="font-bold">{r.product.title}</div>
@@ -86,9 +90,9 @@ export default function CartPage() {
       </div>
 
       {/* Цена — СПРАВА */}
-      <div className="text-right font-bold">
-        {moneyEUR(r.line)}
-      </div>
+      <div className="font-bold md:text-right">
+  {moneyEUR(r.line)}
+</div>
     </div>
   ))}
 </div>
