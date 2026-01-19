@@ -25,21 +25,23 @@ export default function Header() {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6 text-base font-medium">
-          <Link className="hover:text-yellow-500 transition" href="/shop">
-            Магазин
-          </Link>
-          <Link className="hover:text-yellow-500 transition" href="/cart">
-            Корзина
-          </Link>
-          
-          <Link className="hover:text-yellow-500 transition" href="/delivery">
-            Доставка
-          </Link>
-          <Link className="hover:text-yellow-500 transition" href="/infos">
-            Информация
-          </Link>
-        </nav>
+       <nav className="hidden md:flex items-center gap-6 text-base font-medium">
+  <Link className="hover:text-yellow-500 transition" href="/shop">
+    Магазин
+  </Link>
+  <Link className="hover:text-yellow-500 transition" href="/cart">
+    Корзина
+  </Link>
+  <Link className="hover:text-yellow-500 transition" href="/delivery">
+    Доставка
+  </Link>
+  <Link className="hover:text-yellow-500 transition" href="/infos">
+    Информация
+  </Link>
+  <Link className="hover:text-yellow-500 transition" href="/auth">
+    Авторизация
+  </Link>
+</nav>
 
         {/* MOBILE BUTTON */}
         <button
@@ -68,6 +70,9 @@ export default function Header() {
             <Link onClick={() => setOpen(false)} href="/infos">
               Информация
             </Link>
+            <Link onClick={() => setOpen(false)} href="/auth">
+  Авторизация
+</Link>
           </nav>
         </div>
       )}
