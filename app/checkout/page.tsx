@@ -66,7 +66,7 @@ export default function CheckoutPage() {
         <SectionTitle
           kicker="Финиш"
           title="Оформление заказа"
-          sub="Сейчас подтверждение ведёт на авторизацию. Сервер подключим позже."
+          sub=""
         />
 
         <Card className="mt-10 p-8 max-w-2xl mx-auto">
