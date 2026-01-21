@@ -28,7 +28,7 @@ export default function AddToCart({ slug }: { slug: string }) {
           onClick={() => {
             setErr("");
 
-            // если нельзя — просто покажем сообщение
+            // 
             if (!canAddToCartBySlug(slug)) {
               setErr(
                 "Нельзя смешивать Driada с другими брендами. Оформляйте Driada отдельным заказом."

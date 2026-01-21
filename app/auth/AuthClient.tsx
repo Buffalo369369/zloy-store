@@ -23,7 +23,7 @@ export default function AuthClient() {
   const [telegram, setTelegram] = useState("");
 
   useEffect(() => {
-    // если уже залогинен — сразу в кабинет/куда надо
+    // если уже залогинен — сразу в кабинет
     if (getUser()) router.replace(nextUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,7 +43,7 @@ export default function AuthClient() {
     if (!canSubmit) return;
     setLoading(true);
     try {
-      // ✅ пока заглушка: "логиним" в localStorage
+      // ✅ заглушкa
       setUser({
         email: email.trim(),
         name: name.trim() || "Пользователь",
@@ -80,7 +80,7 @@ export default function AuthClient() {
               />
             </label>
 
-            {/* PASSWORD ✅ добавили */}
+            {/* PASSWORD ✅ */}
             <label className="text-sm font-semibold">
               Пароль
               <input
