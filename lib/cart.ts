@@ -29,7 +29,7 @@ export function getCartCount() {
   return read().reduce((sum, x) => sum + x.qty, 0);
 }
 
-/** Какие бренды сейчас в корзине (по товарам из data.ts) */
+/**  */
 export function getCartBrands(): Set<string> {
   const items = read();
   const brands = new Set<string>();
@@ -43,30 +43,30 @@ export function getCartBrands(): Set<string> {
   return brands;
 }
 
-/** Можно ли добавлять товар в корзину с учетом правила "Driada отдельно" */
+/** "Driada отдельно" */
 export function canAddToCartBySlug(slug: string): boolean {
   const p = products.find((x) => x.slug === slug);
-  if (!p) return true; // если товар не найден — не блокируем на уровне cart.ts
+  if (!p) return true; // 
 
   const cartBrands = getCartBrands();
 
-  // пустая корзина — можно всё
+  // 
   if (cartBrands.size === 0) return true;
 
   const isDriada = p.category === "driada";
   const cartHasDriada = cartBrands.has("driada");
 
-  // если добавляем Driada — можно только если в корзине ТОЛЬКО driada
+  // 
   if (isDriada) {
     return cartBrands.size === 1 && cartHasDriada;
   }
 
-  // если добавляем НЕ Driada — нельзя, если в корзине есть driada
+  // 
   return !cartHasDriada;
 }
 
 export function setQty(slug: string, qty: number) {
-  // если qty > 0 — проверяем правила
+  // 
   if (qty > 0 && !canAddToCartBySlug(slug)) {
     window.dispatchEvent(
       new CustomEvent("cart:error", {

@@ -2,9 +2,9 @@
 
 export type UserProfile = {
   email: string;
-  name: string;      // ФИО
+  name: string;      //
   phone: string;
-  telegram: string;  // ник
+  telegram: string;  //
 };
 
 const KEY = "zloypharm_user_v1";

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-white">
-      {/* ФОН (DESKTOP + MOBILE) */}
+      {/* ФОН */}
       <div className="absolute inset-0">
         {/* Mobile */}
         <Image

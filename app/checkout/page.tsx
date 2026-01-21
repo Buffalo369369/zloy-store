@@ -16,6 +16,10 @@ export default function CheckoutPage() {
   const [mounted, setMounted] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
+  //  ПРОМОКОД 
+  const [promo, setPromo] = useState("");
+  const [promoSaved, setPromoSaved] = useState(false);
+
   useEffect(() => {
     setMounted(true);
 
@@ -25,11 +29,23 @@ export default function CheckoutPage() {
     window.addEventListener("cart", updateCart as any);
     window.addEventListener("storage", updateCart);
 
+    // восстановление промокода
+    try {
+      const saved = localStorage.getItem("zloypharm_promo") || "";
+      setPromo(saved);
+    } catch {}
+
     return () => {
       window.removeEventListener("cart", updateCart as any);
       window.removeEventListener("storage", updateCart);
     };
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("zloypharm_promo", promo);
+    } catch {}
+  }, [promo]);
 
   const rows = useMemo(() => {
     if (!mounted) return [];
@@ -40,7 +56,13 @@ export default function CheckoutPage() {
         const line = p.price * x.qty;
         return { slug: x.slug, title: p.title, qty: x.qty, price: p.price, line };
       })
-      .filter(Boolean) as Array<{ slug: string; title: string; qty: number; price: number; line: number }>;
+      .filter(Boolean) as Array<{
+        slug: string;
+        title: string;
+        qty: number;
+        price: number;
+        line: number;
+      }>;
   }, [cartItems, mounted]);
 
   const subtotal = useMemo(() => rows.reduce((s, r) => s + r.line, 0), [rows]);
@@ -56,20 +78,17 @@ export default function CheckoutPage() {
       return;
     }
 
-    // ✅ пока нет сервера — просто ведём на авторизацию
-    router.push("/auth");
+    // 
+    router.push("/account/orders");
   }
 
   return (
     <main className="py-14 bg-neutral-50">
       <Container>
-        <SectionTitle
-          kicker="Финиш"
-          title="Оформление заказа"
-          sub=""
-        />
+        <SectionTitle kicker="Финиш" title="Оформление заказа" />
 
         <Card className="mt-10 p-8 max-w-2xl mx-auto">
+          {/* СВОДКА */}
           <div className="rounded-xl border border-black/10 bg-white p-5">
             <div className="font-semibold">Сводка заказа</div>
 
@@ -91,10 +110,44 @@ export default function CheckoutPage() {
                 <span className="font-extrabold">{moneyEUR(total)}</span>
               </div>
 
-              {!mounted ? <div className="mt-2 text-xs text-neutral-500">Загружаю…</div> : null}
+              {!mounted ? (
+                <div className="mt-2 text-xs text-neutral-500">Загружаю…</div>
+              ) : null}
             </div>
           </div>
 
+          {/* 🔹 ПРОМОКОД */}
+          <div className="mt-6">
+            <label className="text-sm font-semibold">
+              Промокод
+              <div className="mt-2 flex gap-2">
+                <input
+                  value={promo}
+                  onChange={(e) => {
+                    setPromo(e.target.value);
+                    setPromoSaved(false);
+                  }}
+                  placeholder="Введите промокод"
+                  className="flex-1 rounded-md border border-black/10 px-4 py-3 bg-white outline-none focus:ring-2 focus:ring-yellow-300"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPromoSaved(true)}
+                  className="rounded-md px-4 py-3 font-semibold border border-black/10 hover:bg-black/5 transition"
+                >
+                  OK
+                </button>
+              </div>
+            </label>
+
+            {promoSaved && promo ? (
+              <div className="mt-2 text-sm text-neutral-600">
+                Промокод сохранён ✅
+              </div>
+            ) : null}
+          </div>
+
+          {/* КНОПКИ */}
           <div className="mt-6 flex flex-wrap gap-3">
             <Button
               onClick={handleConfirm}

@@ -8,7 +8,7 @@ export default function FloatingCart() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // важно: на клиенте читаем localStorage
+    // klient
     setCount(getCartCount());
 
     const update = () => setCount(getCartCount());
@@ -35,7 +35,7 @@ export default function FloatingCart() {
         hover:bg-yellow-300 transition
       "
     >
-      {/* Иконка корзины (SVG, чтобы ничего не ставить) */}
+      {/* Иконка */}
       <svg
         width="22"
         height="22"
@@ -60,7 +60,7 @@ export default function FloatingCart() {
         <circle cx="17" cy="19" r="2" fill="currentColor" />
       </svg>
 
-      {/* Бейдж количества */}
+      {/* Бейдж */}
       {count > 0 && (
         <span
           className="
